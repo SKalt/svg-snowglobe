@@ -1,0 +1,89 @@
+<head>
+  <title>SVG snowglobe</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="SVG snowglobe" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    .parallax {
+      background-color: black;
+      perspective: 100px;
+      height: 200vh;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      position: absolute;
+    }
+    div.parallax {
+      position: absolute;
+    }
+    .layer {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      position: absolute;
+    }
+    .layer > svg {
+      bottom: 0;
+      position: absolute;
+      display: block;
+    }
+    .layer-0 {
+      --fill-color: #bbb;
+      transform: translateZ(-150px) scale(2.5);
+    }
+    .layer-1 {
+      --fill-color: #ddd;
+      transform: translateZ(-100px) scale(2);
+    }
+    .layer-2 {
+      transform: translate(-50px) scale(1.5);
+    }
+    .filled {
+      fill: var(--fill-color, #fff);
+    }
+  </style>
+  <svg id="base" width="150vw" height="200vh" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="filter-0">
+        <feTurbulence seed="1" baseFrequency="0.09" />
+        <feColorMatrix
+          values="0 0 0 7 -4
+                  0 0 0 7 -4
+                  0 0 0 7 -4
+                  0 0 0 0 1"
+        />
+      </filter>
+      <mask id="mask-0">
+        <rect width="100%" height="100%" filter="url(#filter-0)" />
+      </mask>
+    </defs>
+    <rect class="filled" width="100%" height="100%" mask="url(#mask-0)" />
+  </svg>
+</head>
+<body>
+
+  <div class="parallax">
+    <div class="layer layer-0">
+      <svg width="200vw" height="200vh" xmlns="http://www.w3.org/2000/svg">
+        <use width="100%" height="100%" xlink:href="#base"></use>
+      </svg>
+    </div>
+    <div class="layer layer-1">
+      <svg width="200vw" height="200vh" xmlns="http://www.w3.org/2000/svg">
+        <use width="100%" height="100%" xlink:href="#base"></use>
+      </svg>
+    </div>
+    <div class="layer layer-2">
+      <svg width="200vw" height="200vh" xmlns="http://www.w3.org/2000/svg">
+        <use width="100%" height="100%" xlink:href="#base"></use>
+      </svg>
+    </div>
+  </div>
+</body>
